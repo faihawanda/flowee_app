@@ -1,8 +1,8 @@
 import 'package:flowee_app/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-class _LoginFormCard extends StatefulWidget {
-  const _LoginFormCard({super.key, required this.formKey, required this.emailController, required this.passwordController, required this.isLoading, required this.onSubmit});
+class LoginFormCard extends StatefulWidget {
+  const LoginFormCard({super.key, required this.formKey, required this.emailController, required this.passwordController, required this.isLoading, required this.onSubmit});
 
   final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
@@ -11,10 +11,10 @@ class _LoginFormCard extends StatefulWidget {
   final VoidCallback onSubmit;
 
   @override
-  State<_LoginFormCard> createState() => __LoginFormCardState();
+  State<LoginFormCard> createState() => _LoginFormCardState();
 }
 
-class __LoginFormCardState extends State<_LoginFormCard> {
+class _LoginFormCardState extends State<LoginFormCard> {
   bool _obscure = true;
 
   @override
@@ -27,7 +27,7 @@ class __LoginFormCardState extends State<_LoginFormCard> {
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.primaryDark.withValues(alpha: 0.23),
+            color: AppTheme.primaryDark.withValues(alpha: 0.22),
             blurRadius: 32,
             offset: Offset(0, 16)
           )
@@ -47,7 +47,7 @@ class __LoginFormCardState extends State<_LoginFormCard> {
                 color: AppTheme.textPrimary
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 5),
             Text(
               'Isi data dibawah ini untuk mulai berbelanja',
               textAlign: TextAlign.center,
@@ -61,39 +61,40 @@ class __LoginFormCardState extends State<_LoginFormCard> {
               controller: widget.emailController,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                labelText: 'Email',
+                labelText: 'Email', // memberi label penanda
                 prefixIcon: Icon(Icons.email_outlined)
               ),
-              validator: (value) => (value == null || value.isEmpty) ? 'Email tidak boleh kosong' : null,
+              validator: (value) => (value == null || value.isEmpty) ? 'Email tidak boleh kosong' : null
             ),
             SizedBox(height: 14),
             TextFormField(
               controller: widget.passwordController,
+              keyboardType: TextInputType.emailAddress,
               obscureText: _obscure,
               decoration: InputDecoration(
-                labelText: 'Password',
+                labelText: 'Password', // memberi label penanda
                 prefixIcon: Icon(Icons.lock_outline),
                 suffixIcon: IconButton(
                   icon: Icon(_obscure ? Icons.visibility_outlined : Icons.visibility_off_outlined),
-                  onPressed: () => setState(() => _obscure = !_obscure),
+                  onPressed: () => setState(() => _obscure = !_obscure), // setstate akan berubah selama di clik user, bisa obscure bisa engga
                 )
               ),
-              validator: (value) => (value == null || value.isEmpty) ? 'Password tidak boleh kosong' : null,
+              validator: (value) => (value == null || value.isEmpty) ? 'Password tidak boleh kosong' : null
             ),
             SizedBox(height: 26),
             ElevatedButton(
-              onPressed: widget.isLoading ? null : widget.onSubmit,
+              onPressed: widget.isLoading ? null : widget.onSubmit, 
               child: widget.isLoading
-              ? SizedBox(
-                width: 22,
-                height: 22,
-                child: CircularProgressIndicator(color: Colors.white, strokeWidth:  2.5)
-              )
-              :Text('Masuk')
+                  ? SizedBox(
+                    height: 22,
+                    width: 22,
+                    child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5),
+                  )
+                  : Text('Masuk')
             )
           ],
         ),
       ),
     );
   }
-}
+} 
