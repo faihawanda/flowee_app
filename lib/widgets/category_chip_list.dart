@@ -14,6 +14,7 @@ class CategoryChipList extends StatelessWidget {
     return SizedBox(
       height: 36,
       child: ListView.separated(
+        scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         separatorBuilder: (_, _) => SizedBox(width: 8),
         itemBuilder: (context, index) {

@@ -40,7 +40,7 @@ class QuantityStepper extends StatelessWidget {
 }
 
 class _StepperButton extends StatelessWidget {
-  const _StepperButton({super.key, required this.icon, required this.onTap});
+  const _StepperButton({required this.icon, required this.onTap});
 
   final IconData icon;
   final VoidCallback onTap;

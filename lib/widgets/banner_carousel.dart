@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
 import 'package:flowee_app/models/promo_banner.dart';
 import 'package:flowee_app/widgets/banner_slide.dart';

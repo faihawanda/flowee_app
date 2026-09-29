@@ -2,10 +2,11 @@ import 'package:flowee_app/data/dummy_data.dart';
 import 'package:flowee_app/screen/detail_screen.dart';
 import 'package:flowee_app/state/favorites_controller.dart';
 import 'package:flowee_app/theme/app_theme.dart';
+import 'package:flowee_app/widgets/empty_favorite_state.dart';
 import 'package:flowee_app/widgets/flower_card.dart';
 import 'package:flutter/material.dart';
 
-class FavoriteScreen extends StatelessWidget {
+class FavoriteScreen extends StatelessWidget { // dia pakai stl karena cuma pakai value notifier dan dia sebagai pendengar
   const FavoriteScreen({super.key});
 
   @override
@@ -15,19 +16,19 @@ class FavoriteScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsetsGeometry.fromLTRB(20, 16, 20, 8),
+            padding: EdgeInsetsGeometry.fromLTRB(20, 16, 20, 8),
             child: Text('Favorite', style: AppTheme.display(fontSize: 24)),
           ),
           Expanded(
             child: ValueListenableBuilder<Set<String>>(
-              valueListenable: FavoritesController.instance,
-              builder: (context, favoriteId, _) {
-                final favoritesFlowers = dummyFlowers
-                .where((flower) => favoriteId.contains(flower.id))
-                .toList();
-
-                if (favoritesFlowers.isEmpty) {
-                  return const Placeholder(); // class empty fav state
+              valueListenable: FavoritesController.instance, 
+              builder: (context, favoriteIds, _) {
+                final FavoriteFlowers = dummyFlowers
+                  .where((flower) => favoriteIds.contains(flower.id))
+                  .toList();
+                
+                if (FavoriteFlowers.isEmpty) {
+                  return const EmptyFavoriteState(); // class empty fav state
                 }
 
                 return GridView.builder(
@@ -36,11 +37,11 @@ class FavoriteScreen extends StatelessWidget {
                     crossAxisCount: 2,
                     mainAxisSpacing: 16,
                     crossAxisSpacing: 16,
-                    childAspectRatio: 0.69
+                    childAspectRatio: 0.68
                   ),
-                  itemCount: favoritesFlowers.length,
+                  itemCount: FavoriteFlowers.length,
                   itemBuilder: (context, index) {
-                    final flower = favoritesFlowers[index];
+                    final flower = FavoriteFlowers[index];
                     return FlowerCard(
                       flower: flower, 
                       onTap: () {
@@ -49,13 +50,13 @@ class FavoriteScreen extends StatelessWidget {
                         );
                       }
                     );
-                  },
+                  }
                 );
-              },
-            ),
+              }
+            )
           )
         ],
-      ),
+      )
     );
   }
 }

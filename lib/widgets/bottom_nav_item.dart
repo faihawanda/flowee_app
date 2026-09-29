@@ -20,29 +20,29 @@ class BottomNavItem extends StatelessWidget {
         margin: EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: selected ? AppTheme.primary.withValues(alpha: 0.12) : Colors.transparent,
+          borderRadius: BorderRadius.circular(18) 
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 22, color: selected ? AppTheme.primary : Colors.transparent),
-            AnimatedSize(
+            Icon(icon, size: 22, color: selected ? AppTheme.primary : Colors.grey),
+            AnimatedSize( //bikin label nya punya animasi dan ngga muncul tiba tiba
               duration: Duration(milliseconds: 220),
               curve: Curves.easeOut,
               child: selected 
                   ? Padding(
-                    padding: EdgeInsets.only(left: 8),
-                    child: Text(
-                      label, 
-                      style: TextStyle(
-                        color: AppTheme.primary,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 17
-                      ),
-                    ),
-                  )
-                  : SizedBox.shrink()
-            )
-            // menganimasikan perubahan ukuran childnya, disini dipakai supaya label muncul dengan animasi (melebar) awalnya lebarnya 0 bukan langsung muncil tiba-tiba.
+                      padding: EdgeInsets.only(left: 8), 
+                      child: Text(
+                        label,
+                        style: TextStyle(
+                          color: AppTheme.primary,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700
+                        ),
+                      )
+                    )
+                    : SizedBox.shrink()
+            ),
           ],
         ),
       ),

@@ -1,6 +1,5 @@
 import 'package:flowee_app/data/dummy_data.dart';
 import 'package:flowee_app/screen/main_screen.dart';
-import 'package:flowee_app/screen/main_screen.dart';
 import 'package:flowee_app/state/auth_controller.dart';
 import 'package:flowee_app/theme/app_theme.dart';
 import 'package:flowee_app/widgets/decorative_glow.dart';
